@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "client": "ng serve --proxy-config proxy.conf.json --open",
+    "client": "ng serve --proxy-config proxy.conf.json --open --target=development",
     "server": "node server.js",
     "build": "ng build",
     "test": "ng test",

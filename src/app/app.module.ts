@@ -1,3 +1,4 @@
+import { UserService } from './search/user.service';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,7 +29,7 @@ import { LoginComponent } from './login/login.component';
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

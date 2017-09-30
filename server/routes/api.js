@@ -8,10 +8,23 @@ const db = require('../db/dbApi')
 /* GET api listing. */
 router.get('/', (req, res) => {
   console.log("Invoked default")
-  res.send('api works');
+  res.redirect("/home");
 });
 
-router.get('/db/saveuser', (req, res) => {
+
+router.get('/getusers', (req, res) => {
+  console.log("Invoked get users")
+
+  db.query('SELECT json_agg(doc) FROM "user".user_detail', (err, res1) => {
+    console.log(res1.rows[0].json_agg)
+    res.send(JSON.stringify(res1.rows[0].json_agg));
+  }
+  );
+
+
+})
+
+router.get('/saveuser', (req, res) => {
   console.log("Invoked saveuser")
   var user = { "last_name": "Nawale", "first_name": "Snehal" };
 
@@ -25,22 +38,37 @@ router.get('/db/saveuser', (req, res) => {
 })
 
 
-router.get('/db/savefaker', (req, res) => {
+router.get('/savefaker', (req, res) => {
   console.log("Invoked savefaker")
 
-  var u = new user.User(faker.internet.userName(), faker.internet.email(), faker.internet.password(),
-    faker.name.firstName(), faker.name.lastName(), faker.date.future(), "Unmarried", faker.name.jobArea,
-    faker.address.city(), faker.address.country(), faker.phone.phoneNumber());
+  for (i = 0; i < 10; i++) {
+    var u = new user.User(faker.internet.userName(), faker.internet.email(), faker.internet.password(),
+      faker.name.firstName(), faker.name.lastName(), faker.date.future(), "Unmarried", faker.name.jobArea,
+      faker.address.city(), faker.address.country(), faker.phone.phoneNumber(), faker.image.avatar());
 
-  db.query('INSERT INTO "user".user_detail( user_first_name, user_last_name,  doc) VALUES ($1,$2,$3)',
-    [u.first, u.last, u], (err, res1) => {
-      console.log(res1)
-      res.send("Insert Complete: " + JSON.stringify(u));
-    }
-  );
+    db.query('INSERT INTO "user".user_detail( user_first_name, user_last_name,  doc) VALUES ($1,$2,$3)',
+      [u.first, u.last, u], (err, res1) => {
+        console.log(res1)
+      }
+    );
+
+  }
+
+  res.send("Insert Complete");
 
 })
 
+
+router.get('/truncateusers', (req, res) => {
+  console.log("Invoked delete all")
+
+  db.query('truncate "user".user_detail', (err, res1) => {
+    console.log(res1)
+    res.send("Truncate completed");
+  }
+  );
+
+})
 
 
 module.exports = router;

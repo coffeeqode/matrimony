@@ -1,3 +1,5 @@
+import { UserService } from './user.service';
+import { User } from '../common/model/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  users: User[];
+  errorMessage: string;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+
+    this.userService.getUsers().subscribe(
+      users => {
+        this.users = users
+      }, error => {
+        error => this.errorMessage = <any>error
+      })
+
   }
 
 }
+
+
