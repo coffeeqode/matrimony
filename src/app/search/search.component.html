@@ -22,12 +22,13 @@
       <br>Country: {{user.country}}
       <br>Mobile Number: {{user.mobileNumber}}
       <br>
-      <a class="btn btn-primary" href="#">View Profile</a>
+      <a class="btn btn-primary" [routerLink]="['/userdetail', user.username]">
+        View Profile</a>
       <br>
       <br>
       <br>
     </div>
- 
+
   </div>
   <!-- /.row -->
 

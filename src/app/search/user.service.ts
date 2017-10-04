@@ -1,5 +1,5 @@
 import { User } from '../common/model/user';
-import { Http, Response } from '@angular/http';
+import { Http, RequestOptionsArgs, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
@@ -11,6 +11,7 @@ import 'rxjs/add/observable/throw';
 export class UserService {
 
   private getUsersUrl = "/api/getusers";
+  private getUserByUserNameURL = "/api/getuser";
   constructor(private http: Http) { }
 
   getUsers(): Observable<User[]> {
@@ -20,6 +21,20 @@ export class UserService {
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
 
+  }
+
+  getUser(username): Observable<User> {
+
+    var basicOptions:RequestOptionsArgs = {
+      search: null,
+      params:{"username":username}
+    };
+    //var reqOptions = new RequestOptions(basicOptions);
+
+    return this.http.get(this.getUserByUserNameURL,basicOptions )
+      .map((response: Response) => <User>response.json())
+      .do(data => console.log('Get User Service for: ' + username + JSON.stringify(data)))
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {

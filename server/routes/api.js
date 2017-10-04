@@ -24,6 +24,27 @@ router.get('/getusers', (req, res) => {
 
 })
 
+router.get('/getuser', (req, res) => {
+  var username = req.query.username;
+  console.log("Invoked get user for username: " + username)
+  var querystring = 'select json_agg(doc)  from "user".user_detail	where doc @> $1';
+  var jsonParams = {
+    "username": username
+  }
+  db.query(querystring,
+    [JSON.stringify(jsonParams)], (err, res1) => {
+      if (err) {
+        console.log("Error while executing query " + err);
+        res.send(err);
+      } else {
+        console.log(res1.rows[0].json_agg)
+        res.send(JSON.stringify(res1.rows[0].json_agg));
+      }
+    }
+  );
+
+})
+
 router.get('/saveuser', (req, res) => {
   console.log("Invoked saveuser")
   var user = { "last_name": "Nawale", "first_name": "Snehal" };
