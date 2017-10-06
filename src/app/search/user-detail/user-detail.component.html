@@ -1,28 +1,39 @@
 <!-- Page Content -->
-<div class="container" *ngIf='user'>
+<div class="panel panel-primary" *ngIf='user'>
 
-  <!-- Page Heading -->
-  <h1 class="my-4">Profile
-    <!--<small>Secondary Text</small>-->
-  </h1>
-
-  <!-- Project One -->
-  <div class="col-md-3 center">
-    <a href="#">
-                <img class="img-fluid rounded mb-3 mb-md-0" [src]='user.photoUrl' alt="">
-              </a>
+  <div class='panel-heading' style='font-size:large'>
+    Profile
   </div>
-  <div class="col-md-9" >
-    <h3>{{user.first}} {{user.last}}</h3>
-    <br>DOB: {{user.dob}}
-    <br>Marital Status: {{user.maritalStatus}}
-    <br>Education: {{user.education}}
-    <br>City: {{user.city}}
-    <br>Country: {{user.country}}
-    <br>Mobile Number: {{user.mobileNumber}}
-    <br>
-    <br>
-    <br>
+
+  <div class='panel-body'>
+    <div class="row">
+      <div class="col-md-3 center">
+        <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" [src]='user.photoUrl' alt="Profile pic">
+          </a>
+      </div>
+      <div class="col-md-9">
+        <h3>{{user.first}} {{user.last}}</h3>
+        <br>DOB: {{user.dob}}
+        <br>Marital Status: {{user.maritalStatus}}
+        <br>Education: {{user.education}}
+        <br>City: {{user.city}}
+        <br>Country: {{user.country}}
+        <br>Mobile Number: {{user.mobileNumber}}
+      </div>
+    </div>
+  </div>
+
+  <div class='panel-footer'>
+    <div class="row">
+
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-9">
+        <a class='btn btn-primary' (click)='onBack()' style='width:80px'>Back</a>
+      </div>
+    </div>
+
   </div>
 
 

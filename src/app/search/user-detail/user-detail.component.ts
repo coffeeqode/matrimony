@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../user.service';
@@ -10,7 +10,7 @@ import { User } from '../../common/model/user';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
-export class UserDetailComponent implements OnInit,OnDestroy {
+export class UserDetailComponent implements OnInit, OnDestroy {
   user: User;
   errorMessage: string;
   private sub: Subscription;
@@ -18,24 +18,6 @@ export class UserDetailComponent implements OnInit,OnDestroy {
 
   constructor(private _route: ActivatedRoute,
     private _router: Router, private userService: UserService) { }
-
-
-  ngOnInit() {
-
-    this.sub = this._route.params.subscribe(
-      params => {
-        let username = params['username'];
-        console.log("Route params:"+username)
-        this.getUser(username);
-      });
-
-
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-}
-
 
   getUser(username) {
     this.userService.getUser(username).subscribe(
@@ -45,6 +27,26 @@ export class UserDetailComponent implements OnInit,OnDestroy {
         error => this.errorMessage = <any>error
       })
 
+  }
+
+  ngOnInit() {
+
+    this.sub = this._route.params.subscribe(
+      params => {
+        let username = params['username'];
+        console.log("Route params:" + username)
+        this.getUser(username);
+      });
+
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  onBack(): void {
+    this._router.navigate(['/search']);
   }
 
 }
