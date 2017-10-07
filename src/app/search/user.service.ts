@@ -10,8 +10,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class UserService {
 
-  private getUsersUrl = "/api/getusers";
-  private getUserByUserNameURL = "/api/getuser";
+  private getUsersUrl = "https://afternoon-forest-57488.herokuapp.com/api/getusers";
+  private getUserByUserNameURL = "https://afternoon-forest-57488.herokuapp.com/api/getuser";
   constructor(private http: Http) { }
 
   getUsers(): Observable<User[]> {
