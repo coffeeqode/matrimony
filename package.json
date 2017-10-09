@@ -4,17 +4,17 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "client": "ng serve --proxy-config proxy.conf.json --open --target=development",
-    "server": "node server.js",
-    "build": "ng build",
+    "local-client": "ng serve --proxy-config proxy.conf.json --open --target=development",
+    "local-server": "node server.js",
+    "prestart": "npm install",
+    "start": "ng build",
+    "poststart": "surge ./dist",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@angular/cli": "1.0.6",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -30,12 +30,10 @@
     "jquery": "^3.2.1",
     "pg": "^7.3.0",
     "popper.js": "^1.12.5",
-    "faker": "^4.1.0",
-    "typescript": "~2.2.1",
-    "ts-node": "~2.0.0",
-    "tslint": "~4.5.0"
+    "faker": "^4.1.0"
   },
   "devDependencies": {
+    "@angular/cli": "1.0.6",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
@@ -45,9 +43,13 @@
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
-    "protractor": "~5.1.0"
+    "protractor": "~5.1.0",
+    "surge": "^0.19.0",
+    "ts-node": "~2.0.0",
+    "tslint": "~4.5.0",
+    "typescript": "~2.2.0"
   }
 }
