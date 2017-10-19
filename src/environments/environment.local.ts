@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   serverUrl: "",
-  envName:"prod"
+  envName:"local"
 };
