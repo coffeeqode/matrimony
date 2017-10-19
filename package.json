@@ -8,7 +8,7 @@
     "dev-client": "ng serve --proxy-config proxy.dev.conf.json --open --environment=dev",
     "local-server": "node server.js",
     "prestart": "npm install",
-    "start": "ng build",
+    "start": "ng build --environment=dev",
     "poststart": "surge ./dist",
     "test": "ng test",
     "lint": "ng lint",
