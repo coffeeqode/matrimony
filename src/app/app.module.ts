@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { UserDetailComponent } from './search/user-detail/user-detail.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 
+import {LoginGuard} from '../app/common/service/login-guard.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +30,16 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
       { path: 'home', component: HomeComponent },
       { path: 'search', component: SearchComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'createprofile', component: CreateProfileComponent },
+      {
+        path: 'createprofile', component: CreateProfileComponent,
+        canActivate: [LoginGuard]
+      },
       { path: 'userdetail/:username', component: UserDetailComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
-  providers: [UserService],
+  providers: [UserService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

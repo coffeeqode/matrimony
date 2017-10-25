@@ -9,4 +9,11 @@ import {environment } from '../environments/environment'
 export class AppComponent {
   title = 'app works!';
   envLabel = environment.envName;
+  
+
+  logout(){
+    console.log("Logged out current user");
+    
+    localStorage.removeItem("currentUser");
+  }
 }

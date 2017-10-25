@@ -12,6 +12,7 @@ export class User {
     country: string;
     mobileNumber: string;
     photoUrl: string;
+    isLoggedIn:boolean;
 
     constructor(
         username: string,
